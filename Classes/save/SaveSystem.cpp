@@ -1,7 +1,8 @@
-
+Ôªø
 
 #include "SaveSystem.h"
 #include "GFileUtils.h"
+#include "NameUtil.h"
 
 
 static SaveSystem* _saveSystem = nullptr;
@@ -23,7 +24,7 @@ SaveSystem::SaveSystem():
 {
 	createDefaultSave();
 
-	//readFromSave();
+	readFromSave();
 
 	//test();
 }
@@ -31,64 +32,114 @@ SaveSystem::SaveSystem():
 void SaveSystem::createDefaultSave(){
 	ByteBuffer saveBuffer;
 
-	//Õ∑≤ø–≈œ¢
-	uint32 type = Save_Header;
-	saveBuffer << type;
-
+	//Â§¥ÈÉ®‰ø°ÊÅØ
 	HeaderInfo headerInfo;
 	headerInfo.id = 10001;
 	headerInfo.name = "save_gujian_header";
 
 	headerInfo.writeToBuffer(saveBuffer);
 
-	//Ω«…´–≈œ¢
-	type = Save_Role;
-	saveBuffer << type;
-
+	//ËßíËâ≤‰ø°ÊÅØ
 	RoleInfo roleInfo;
 	roleInfo.name = "gujian";
-	roleInfo.cur_hp = 954;
-	roleInfo.max_mp = 1234;
-	roleInfo.cur_mp = 1220;
-	roleInfo.max_mp = 2566;
+	roleInfo.level = 1;
+	roleInfo.exp = 0;
+	roleInfo.cur_hp = 400;
+	roleInfo.max_hp = 500;
+	roleInfo.cur_mp = 200;
+	roleInfo.max_mp = 300;
+	roleInfo.attack = 500;
+	roleInfo.defence = 230;
+	roleInfo.magic = 400;
+	roleInfo.magic_defence = 300;
+	roleInfo.speed = 100;
 
 	roleInfo.writeToBuffer(saveBuffer);
 
-	//ŒÔ∆∑–≈œ¢
-	type = Save_Good;
-	saveBuffer << type;
-
+	//Áâ©ÂìÅ‰ø°ÊÅØ
 	GoodInfo goodInfo;
 
-	GoodItemInfo* jinchuangyao = new GoodItemInfo;
-	jinchuangyao->id = 1001001;
-	jinchuangyao->name = "jinchuangyao";
-	jinchuangyao->type = Good_AddHp;
-	jinchuangyao->affectValue = 1000;
-	jinchuangyao->num = 10;
+	GoodItemInfo jinchuangyao;
+	jinchuangyao.id = 1001001;
+	jinchuangyao.name = "jinchuangyao";
+	jinchuangyao.type = Good_AddHp;
+	jinchuangyao.affectValue = 1000;
+	jinchuangyao.num = 10;
 	goodInfo.infoList.push_back(jinchuangyao);
 
-	GoodItemInfo* shexiang = new GoodItemInfo;
-	shexiang->id = 1002001;
-	shexiang->name = "shexiang";
-	shexiang->type = Good_AddMp;
-	shexiang->affectValue = 500;
-	shexiang->num = 5;
+	GoodItemInfo shexiang;
+	shexiang.id = 1002001;
+	shexiang.name = "shexiang";
+	shexiang.type = Good_AddMp;
+	shexiang.affectValue = 500;
+	shexiang.num = 5;
 	goodInfo.infoList.push_back(shexiang);
 
 	goodInfo.writeToBuffer(saveBuffer);
 
-	//Œ≤≤ø–≈œ¢
-	type = Save_End;
-	saveBuffer << type;
+	//Ë£ÖÂ§á‰ø°ÊÅØ
+	EquipmentInfo equipmentInfo;
 
+	// Ê≠¶Âô®
+	EquipmentItemInfo weapon;
+	weapon.id = 1002001;
+	weapon.name = "duanjian";
+	weapon.type = Equipment_Weapon;
+	weapon.affect_attack = 102;
+	equipmentInfo.infoList.push_back(weapon);
+
+	// Â∏ΩÂ≠ê
+	EquipmentItemInfo head;
+	head.id = 1002001;
+	head.name = "bumao";
+	head.type = Equipment_Head;
+	head.affect_defence = 50;
+	equipmentInfo.infoList.push_back(head);
+
+	// È°πÈìæ
+	EquipmentItemInfo neck;
+	neck.id = 1002001;
+	neck.name = "wuseshi";
+	neck.type = Equipment_Neck;
+	neck.affect_magic = 30;
+	equipmentInfo.infoList.push_back(neck);
+
+	// Ë°£Êúç
+	EquipmentItemInfo cloth;
+	cloth.id = 1002001;
+	cloth.name = "buyi";
+	cloth.type = Equipment_Cloth;
+	cloth.affect_defence = 80;
+	equipmentInfo.infoList.push_back(cloth);
+
+	// ËÖ∞Â∏¶
+	EquipmentItemInfo belt;
+	belt.id = 1002001;
+	belt.name = "buyaodai";
+	belt.type = Equipment_Belt;
+	belt.affect_hp = 180;
+	belt.affect_defence = 20;
+	equipmentInfo.infoList.push_back(belt);
+
+	// ÈûãÂ≠ê
+	EquipmentItemInfo shoes;
+	shoes.id = 1002001;
+	shoes.name = "buxie";
+	shoes.type = Equipment_Shoes;
+	shoes.affect_speed = 20;
+	shoes.affect_defence = 20;
+	equipmentInfo.infoList.push_back(shoes);
+
+	equipmentInfo.writeToBuffer(saveBuffer);
+
+	//Â∞æÈÉ®‰ø°ÊÅØ
 	EndInfo endInfo;
 	endInfo.id = 10001;
 	endInfo.name = "save_gujian_end";
 
 	endInfo.writeToBuffer(saveBuffer);
 
-	//±£¥ÊµΩŒƒº˛
+	//‰øùÂ≠òÂà∞Êñá‰ª∂
 	GFileUtils::saveBuffer(_savePath, saveBuffer);
 }
 
@@ -103,63 +154,52 @@ void SaveSystem::readFromSave(){
 
 	uint32 type = 0;
 	
-	//Õ∑≤ø–≈œ¢
-	readBuffer >> type;
+	while(true){
 
-	_pHeaderInfo = new HeaderInfo();
-	_pHeaderInfo->readFromBuffer(readBuffer);
+		readBuffer >> type;
+		Glog("type:aaa  %d", type);
 
-	readBuffer >> type;
+		if(type == Save_Header){
+			//Â§¥ÈÉ®‰ø°ÊÅØ
+			_pHeaderInfo = new HeaderInfo();
+			_pHeaderInfo->readFromBuffer(readBuffer);
+		}
 
-	_pRoleInfo = new RoleInfo();
-	_pRoleInfo->readFromBuffer(readBuffer);
+		if(type == Save_End){
+			//Â∞æÈÉ®‰ø°ÊÅØ
+			_pEndInfo = new EndInfo();
+			_pEndInfo->readFromBuffer(readBuffer);
 
-	readBuffer >> type;
+			//ËØªÂèñÂÆåÊàêÔºåÂÅúÊ≠¢ËØªÂèñ
+			break;
+		}
 
-	_pGoodInfo = new GoodInfo();
-	_pGoodInfo->readFromBuffer(readBuffer);
+		if(type == Save_Role){
+			Glog("type:2222222");
+			//‰∫∫Áâ©‰ø°ÊÅØ
+			_pRoleInfo = new RoleInfo();
+			_pRoleInfo->readFromBuffer(readBuffer);
+		}
 
-	readBuffer >> type;
+		if(type == Save_Good){
+			Glog("type:33333333");
+			//Áâ©ÂìÅ‰ø°ÊÅØ
+			_pGoodInfo = new GoodInfo();
+			_pGoodInfo->readFromBuffer(readBuffer);
+		}
 
-	_pEndInfo = new EndInfo();
-	_pEndInfo->readFromBuffer(readBuffer);
+		if(type == Save_Equipment){
+			Glog("type:444");
+			//Ë£ÖÂ§á‰ø°ÊÅØ
+			_pEquipmentInfo = new EquipmentInfo();
+			_pEquipmentInfo->readFromBuffer(readBuffer);
+		}
 
-	
-	//while(true){
+	}
 
-	//	readBuffer >> type;
-	//	log("type:aaa  %d", type);
-	//	if(type == Save_End){
-	//		log("type:1111111");
-	//		//Œ≤≤ø–≈œ¢
-	//		_pEndInfo = new EndInfo();
-	//		_pEndInfo->readFromBuffer(readBuffer);
-
-	//		//∂¡»°ÕÍ≥…£¨Õ£÷π∂¡»°
-	//		break;
-	//	}
-
-	//	if(type == Save_Role){
-	//		log("type:2222222");
-	//		//»ÀŒÔ–≈œ¢
-	//		_pRoleInfo = new RoleInfo();
-	//		_pRoleInfo->readFromBuffer(readBuffer);
-	//	}
-
-	//	if(type == Save_Good){
-	//		log("type:33333333");
-	//		//ŒÔ∆∑–≈œ¢
-	//		_pGoodInfo = new GoodInfo();
-	//		_pGoodInfo->readFromBuffer(readBuffer);
-	//	}
-
-	//}
-	
-
-	log("header:%s", _pHeaderInfo->name.c_str());
-	log("end:%s", _pEndInfo->name.c_str());
-	log("roleInfo:%s,%d", _pRoleInfo->name, _pRoleInfo->max_hp);
-	log("goodInfo:%d", _pGoodInfo->num);
+	Glog("%s", _pRoleInfo->toString().c_str());
+	Glog("%s", _pGoodInfo->toString().c_str());
+	Glog("%s", _pEquipmentInfo->toString().c_str());
 }
 
 void SaveSystem::test(){
@@ -196,7 +236,7 @@ void SaveSystem::test(){
 	readBuffer >> name1;
 	readBuffer >> name2;
 
-	log("num12:%d,%d,%s,%s",num1,num4,name1.c_str(),name2.c_str());
+	Glog("num12:%d,%d,%s,%s",num1,num4,name1.c_str(),name2.c_str());
 }
 
 SaveSystem::~SaveSystem(){

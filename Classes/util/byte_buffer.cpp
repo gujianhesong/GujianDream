@@ -81,14 +81,14 @@ ByteBuffer & ByteBuffer::operator<<(double value)
 }
 ByteBuffer & ByteBuffer::operator<<(const std::string & value)
 {
-	append((uint8*) value.c_str(), value.length());
-	append((uint8) 0);
+	append((uint32)value.size());
+	append(value.c_str(), value.size());
 	return *this;
 }
 ByteBuffer & ByteBuffer::operator<<(const char* str)
 {
-	append((uint8*) str, strlen(str));
-	append((uint8) 0);
+	append((uint32)strlen(str));
+	append(str, strlen(str));
 	return *this;
 }
 ByteBuffer & ByteBuffer::operator>>(bool & value)
@@ -149,14 +149,12 @@ ByteBuffer & ByteBuffer::operator>>(double & value)
 ByteBuffer & ByteBuffer::operator>>(std::string & value)
 {
 	value.clear();
-	while (true)
-	{
-		char c = read<char> ();
-		if (c == 0)
-			break;
-		value += c;
+    
+    uint32 size = read<uint32>();
+	for(uint32 i = 0; i < size; i++){
+		value.push_back(read<char>());
 	}
-	return *this;
+    return *this;
 }
 uint8 ByteBuffer::operator[](size_t pos)
 {

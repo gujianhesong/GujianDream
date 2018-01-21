@@ -1,4 +1,4 @@
-#include "ReadUtil.h"
+ï»¿#include "ReadUtil.h"
 #include "byteorder.h"
 
 
@@ -86,7 +86,7 @@ int readString(unsigned char* &data, std::string& value, bool isSwap/* =true */)
 	memcpy(dest, data, len);
 	value.clear();
 	value.append((const char*)dest, len);
-	data = data+len;//dataºóÒÆ
+	data = data+len;//dataåç§»
 	delete[] dest;
 	return (len+sizeof(short));
 }
@@ -95,7 +95,7 @@ int readCSString(unsigned char* &data, std::string& value, bool isSwap)
 	int stringLength = 0;
 	bool stringLengthParsed = false;
 	int step = 0;
-	int addPos = 0;//¶ÁÈ¡ÁËµÄ³¤¶È
+	int addPos = 0;//è¯»å–äº†çš„é•¿åº¦
 	char part;
 	while(!stringLengthParsed)
 	{
@@ -112,7 +112,7 @@ int readCSString(unsigned char* &data, std::string& value, bool isSwap)
 	memcpy(dest, data, stringLength);
 	value.clear();
 	value.append((const char*)dest, stringLength);
-	data = data+stringLength;//dataºóÒÆ
+	data = data+stringLength;//dataåç§»
 	delete[] dest;
 
 	addPos += stringLength;

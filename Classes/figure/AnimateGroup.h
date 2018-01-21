@@ -1,4 +1,4 @@
-#ifndef _AnimateGroup_  
+ï»¿#ifndef _AnimateGroup_  
 #define _AnimateGroup_  
 
 #include "cocos2d.h"  
@@ -11,21 +11,21 @@ class AnimateGroup : public cocos2d::Animate
 public:  
 	AnimateGroup();  
 	~AnimateGroup();  
-	//ÓÃÊı×éÀ´³õÊ¼»¯º¯Êı   
+	//ç”¨æ•°ç»„æ¥åˆå§‹åŒ–å‡½æ•°   
 	static AnimateGroup* actionWithAnimation(cocos2d::CCAnimation *animation, Vector<AnimationMember*> &members); 
-	//ÓÃ¶¯»­ºÍÊı×éÀ´³õÊ¼»¯
+	//ç”¨åŠ¨ç”»å’Œæ•°ç»„æ¥åˆå§‹åŒ–
 	bool initWithAnimation(cocos2d::CCAnimation *animation, Vector<AnimationMember*> &members);
-	//ÓÃ³ÉÔ±ÊıÀ´³õÊ¼»¯  
+	//ç”¨æˆå‘˜æ•°æ¥åˆå§‹åŒ–  
 	static AnimateGroup* actionWithAnimation(cocos2d::CCAnimation *animation); 
-	//ÓÃ¶¯»­ºÍÊı×éÊıÀ´³õÊ¼»¯  
+	//ç”¨åŠ¨ç”»å’Œæ•°ç»„æ•°æ¥åˆå§‹åŒ–  
 	bool initWithAnimation(cocos2d::CCAnimation *animation);
 
 	void startWithTarget(cocos2d::CCNode *pTarget);  
-	void stop();  //ËùÓĞ¶¯»­Í£Ö¹  
+	void stop();  //æ‰€æœ‰åŠ¨ç”»åœæ­¢  
 
 	void update(float dt);  
 
-	Vector<AnimationMember*> _members;  //¶¯»­³ÉÔ±  
+	Vector<AnimationMember*> _members;  //åŠ¨ç”»æˆå‘˜  
 protected:  
 
 };  

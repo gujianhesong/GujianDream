@@ -1,4 +1,4 @@
-
+﻿
 
 #ifndef gujian_PublicSourceDefine_h
 #define gujian_PublicSourceDefine_h
@@ -18,6 +18,9 @@ const static std::string CSVFILE_ROLE = "csv/Role.txt";
 const static std::string CSVFILE_MONSTER = "csv/Monster.txt";
 const static std::string CSVFILE_WEAPON_TEXTURE_POS = "csv/weapon_texture_position.txt";
 const static std::string CSVFILE_ROLE_TEXTURE_POS = "csv/role_texture_postion.txt";
+
+//名字
+const static std::string NAMES_FILE = "names";
 
 
 #endif

@@ -1,10 +1,18 @@
-#ifndef BASIC_TYPES_H
+﻿#ifndef BASIC_TYPES_H
 #define BASIC_TYPES_H
 
 
 #include <math.h>
 
-
+//定义log宏
+#if 1<2
+#define Glog(format,...) cocos2d::CCLog("[%s, %d]----"format,__FUNCTION__,__LINE__, ##__VA_ARGS__)
+//#define GLOG(format,...) cocos2d::CCLog("%s, %s, %d----"format,__FILE__,__FUNCTION__,__LINE__, ##__VA_ARGS__)
+#define Gerror(format,...) cocos2d::CCLog("[%s,%d]----[error]"format,__FILE__,__FUNCTION__,__LINE__, ##__VA_ARGS__)
+#else
+#define Glog(format,...) 
+#define Gerror(format,...) 
+#endif
 
 #ifdef _MSC_VER
 

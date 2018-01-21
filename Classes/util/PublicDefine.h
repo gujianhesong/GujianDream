@@ -1,10 +1,11 @@
-
+﻿
 #ifndef gujian_PublicDefine_h
 #define gujian_PublicDefine_h
 
 #include "cocos2d.h"
-#include "CsvUtil.h"
 #include "PublicSourceDefine.h"
+#include "CsvUtil.h"
+
 using namespace cocos2d;
 
 #define CREATE_INSTANCE_FUNC(__CLASS__) \

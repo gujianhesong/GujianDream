@@ -1,4 +1,4 @@
-#ifndef _TOOLS_H_
+ï»¿#ifndef _TOOLS_H_
 #define  _TOOLS_H_
 
 #include "cocos2d.h"
@@ -8,7 +8,7 @@
 // #include "iconv.h"
 // #endif
 
-//»ñÈ¡Ò»¸öÎÄ¼şµÄ³¤¶È£¨[int]pszFileName£ºÎÄ¼şÃû£¬[out]size£ºÎÄ¼ş³¤¶È£©
+//è·å–ä¸€ä¸ªæ–‡ä»¶çš„é•¿åº¦ï¼ˆ[int]pszFileNameï¼šæ–‡ä»¶åï¼Œ[out]sizeï¼šæ–‡ä»¶é•¿åº¦ï¼‰
 void getLocalFileLength(const char* pszFileName, long long* pSize);
 
 float heronsformula(float x1,float y1,float x2,float y2,float x3,float y3);
@@ -16,30 +16,30 @@ float heronsformula(float x1,float y1,float x2,float y2,float x3,float y3);
 bool triangleContainPoint(float x1,float y1,float x2,float y2,float x3,float y3,float px,float py);
 
 // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-// //×Ö·û×ª»»£¬Ê¹cocos2d-xÔÚwin32Æ½Ì¨Ö§³ÖÖĞÎÄÏÔÊ¾
+// //å­—ç¬¦è½¬æ¢ï¼Œä½¿cocos2d-xåœ¨win32å¹³å°æ”¯æŒä¸­æ–‡æ˜¾ç¤º
 // int GBKToUTF8(std::string &gbkStr,const char* toCode,const char* formCode);
 // #endif
 
-class tLinkData//³¬Á´½ÓÊı¾İ
+class tLinkData//è¶…é“¾æ¥æ•°æ®
 {
 public:
-	std::string showStr;//ÏÔÊ¾ÎÄ×Ö
-	std::string linkStr;//Á¬½ÓÄÚÈİ
-	int value;//Ò»Ğ©Öµ
-	int startPos;//³¬Á´½ÓËùÔÚ×Ö´®ÖĞ¿ªÊ¼Î»ÖÃ
-	int endPos;//³¬Á´½ÓËùÔÚ×Ö´®ÖĞ½áÊøÎ»ÖÃ
+	std::string showStr;//æ˜¾ç¤ºæ–‡å­—
+	std::string linkStr;//è¿æ¥å†…å®¹
+	int value;//ä¸€äº›å€¼
+	int startPos;//è¶…é“¾æ¥æ‰€åœ¨å­—ä¸²ä¸­å¼€å§‹ä½ç½®
+	int endPos;//è¶…é“¾æ¥æ‰€åœ¨å­—ä¸²ä¸­ç»“æŸä½ç½®
 };
-class tColorStrData//ÑÕÉ«Êı¾İ
+class tColorStrData//é¢œè‰²æ•°æ®
 {
 public:
-	std::string showStr;//ÏÔÊ¾ÎÄ×Ö
-	cocos2d::ccColor3B color;//ÑÕÉ«Öµ
-	int startPos;//³¬Á´½ÓËùÔÚ×Ö´®ÖĞ¿ªÊ¼Î»ÖÃ
-	int endPos;//³¬Á´½ÓËùÔÚ×Ö´®ÖĞ½áÊøÎ»ÖÃ
+	std::string showStr;//æ˜¾ç¤ºæ–‡å­—
+	cocos2d::ccColor3B color;//é¢œè‰²å€¼
+	int startPos;//è¶…é“¾æ¥æ‰€åœ¨å­—ä¸²ä¸­å¼€å§‹ä½ç½®
+	int endPos;//è¶…é“¾æ¥æ‰€åœ¨å­—ä¸²ä¸­ç»“æŸä½ç½®
 };
 
-std::vector<tLinkData> getLinkDataFromStr(std::string str, char frontSplit='(', char middleSplit=',', char backSplit=')');//´ÓstrÖĞÕÒ³ölinkÊı¾İ
-tColorStrData getColorStrDataFromStr(std::string str, char frontSplit='[', char middleSplit='#', char backSplit=']');//´ÓstrÖĞÕÒ³öÑÕÉ«Êı¾İ
+std::vector<tLinkData> getLinkDataFromStr(std::string str, char frontSplit='(', char middleSplit=',', char backSplit=')');//ä»strä¸­æ‰¾å‡ºlinkæ•°æ®
+tColorStrData getColorStrDataFromStr(std::string str, char frontSplit='[', char middleSplit='#', char backSplit=']');//ä»strä¸­æ‰¾å‡ºé¢œè‰²æ•°æ®
 
 cocos2d::CCRect getRect2(cocos2d::CCNode* pNode);
 cocos2d::CCRect getRect(cocos2d::CCNode* pNode);

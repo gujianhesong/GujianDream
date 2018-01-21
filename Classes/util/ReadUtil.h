@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
 #include "basic_types.h"
 #include <string>
 
 
 
-int readInt8(unsigned char* &data, int8& value);//·µ»Ø¶ÁÈ¡³¤¶È
+int readInt8(unsigned char* &data, int8& value);//è¿”å›è¯»å–é•¿åº¦
 int readShort(unsigned char* &data, short& value, bool isSwap=true);
 int readUint16(unsigned char* &data, uint16& value, bool isSwap=true);
 int readInt(unsigned char* &data, int& value, bool isSwap=true);
@@ -16,7 +16,7 @@ int readBool(unsigned char* &data, bool& value);
 int readChar(unsigned char* &data, char& value);
 int readUChar(unsigned char* &data, unsigned char& value);
 int readString(unsigned char* &data, std::string& value, bool isSwap=true);
-int readCSString(unsigned char* &data, std::string& value, bool isSwap=true);//¶ÁÈ¡c#ÎÄ¼şĞ´µÄstring
+int readCSString(unsigned char* &data, std::string& value, bool isSwap=true);//è¯»å–c#æ–‡ä»¶å†™çš„string
 
 inline void my_memcpy(unsigned char* dst, unsigned char* src, size_t len)
 {

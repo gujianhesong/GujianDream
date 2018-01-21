@@ -1,4 +1,4 @@
-#include "AnimateGroup.h"
+﻿#include "AnimateGroup.h"
 
 AnimateGroup* AnimateGroup::actionWithAnimation(cocos2d::CCAnimation *animation)  
 {  

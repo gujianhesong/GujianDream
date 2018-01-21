@@ -1,4 +1,4 @@
-#include "tools.h"
+ï»¿#include "tools.h"
 USING_NS_CC;
 
 
@@ -42,7 +42,7 @@ bool triangleContainPoint(float x1,float y1,float x2,float y2,float x3,float y3,
 }
 
 // #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-// //×Ö·û×ª»»£¬Ê¹cocos2d-xÔÚwin32Æ½Ì¨Ö§³ÖÖĞÎÄÏÔÊ¾
+// //å­—ç¬¦è½¬æ¢ï¼Œä½¿cocos2d-xåœ¨win32å¹³å°æ”¯æŒä¸­æ–‡æ˜¾ç¤º
 // int GBKToUTF8(std::string &gbkStr,const char* toCode,const char* formCode)
 // {
 // 	iconv_t iconvH;

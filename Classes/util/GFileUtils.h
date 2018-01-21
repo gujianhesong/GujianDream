@@ -1,7 +1,9 @@
-#ifndef __gujian__GFileUtils__
+﻿#ifndef __gujian__GFileUtils__
 #define __gujian__GFileUtils__
 
 #include "cocos2d.h"
+#include "ByteBuffer.h"
+
 using namespace std;
 USING_NS_CC;
 
@@ -28,23 +30,23 @@ public:
 	}
 
 	/************************************************************************/
-	/* ���ļ���ȡ����                                                                     */
+	/* 从文件读取内容                                                                     */
 	/************************************************************************/
 	static unsigned char* readFile(string pFileName, ssize_t &len){      
-		//��¼cocos2d-x��CCFileUtils������û���ҵ��ļ��Ƿ񵯳���ʾ�������    
+		//记录cocos2d-x中CCFileUtils，对于没有找到文件是否弹出提示框的设置    
 		bool isNeedModifyPopupSetting  = FileUtils::sharedFileUtils()->isPopupNotify();    
-		//�������ʾ������ʱ�رգ���Ϊ����Ķ�ȡ�����Ҳ������ļ�����Ϊ���ļ��п��ܻ�û�д���    
+		//如果有提示，就暂时关闭，因为这里的读取可能找不到该文件，因为该文件有可能还没有创建    
 		if(isNeedModifyPopupSetting)    
 		{    
 			CCFileUtils::sharedFileUtils()->setPopupNotify(false);    
 		}     
-		//��ȡ�ļ���·��,ʹ��getWritablePath����Ϊ����ļ���������Ҫ�洢���ļ�    
+		//获取文件的路径,使用getWritablePath是因为这个文件是我们需要存储的文件    
 		string path = FileUtils::sharedFileUtils()->getWritablePath() + pFileName;     
 		CCLog("path = %s",path.c_str());    
-		//��ȡ�ļ���ע��ʹ�ò���"rb"��r��ʾread��b��ʾ������binary    
+		//读取文件，注意使用参数"rb"，r表示read，b表示二进制binary    
 		unsigned char* data = CCFileUtils::sharedFileUtils()->getFileData(path.c_str(), "rb", &len);    
 		CCLog("read data length = %d", len);    
-		//�����ǰ�����Ҳ����ļ�����ʾ����Ļ�ԭ��������    
+		//如果以前设置找不到文件有提示，则改回原来的设置    
 		if(isNeedModifyPopupSetting)    
 		{    
 			CCFileUtils::sharedFileUtils()->setPopupNotify(true);    
@@ -54,14 +56,14 @@ public:
 
 
 	/************************************************************************/
-	/* �������ݵ��ļ�                                                                     */
+	/* 保存内容到文件                                                                     */
 	/************************************************************************/
 	static bool saveFile(unsigned char *pContent, string pFileName, int length){      
-		//��ȡ������ļ�·��     
+		//获取储存的文件路径     
 		string path = FileUtils::sharedFileUtils()->getWritablePath() + pFileName;      
 		CCLog("save file path = %s",path.c_str());      
 
-		//����һ���ļ�ָ�룬ע��Ҫʹ�ò���"wb"��w��ʾwrite��b��ʾ������binary��֮ǰ��ʹ�õ���"w",ios�ϵ�ʱû�з������⣬����win32�ϻ���bug���ĳ�"wb"��û��������    
+		//创建一个文件指针，注意要使用参数"wb"，w表示write，b表示二进制binary，之前我使用的是"w",ios上当时没有发现问题，但是win32上会有bug，改成"wb"就没有问题了    
 		FILE* file = fopen(path.c_str(), "wb");     
 
 		if (file) {     

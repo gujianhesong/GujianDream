@@ -1,4 +1,4 @@
-#ifndef __gujian__StringHelper__
+﻿#ifndef __gujian__StringHelper__
 #define __gujian__StringHelper__
 
 #include "cocos2d.h"

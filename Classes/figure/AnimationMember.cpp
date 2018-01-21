@@ -1,4 +1,4 @@
-
+ï»¿
 #include "AnimationMember.h"
 
 AnimationMember::AnimationMember()  
@@ -48,15 +48,15 @@ bool AnimationMember::initWithAnimation(cocos2d::CCAnimation *animation, cocos2d
 
 void AnimationMember::start()  
 {  
-	_origFrame = _target->getSpriteFrame(); //È¡µÃµ±Ç°ÏÔÊ¾µÄÖ¡×÷Îª³õÊ¼Ö¡  
+	_origFrame = _target->getSpriteFrame(); //å–å¾—å½“å‰æ˜¾ç¤ºçš„å¸§ä½œä¸ºåˆå§‹å¸§  
 }  
 
 void AnimationMember::stop()  
 {  
-	bool bRestore = _animation->getRestoreOriginalFrame(); //²¥·ÅÍê³ÉºóÊÇ·ñ»Ö¸´µÚÒ»Ö¡  
+	bool bRestore = _animation->getRestoreOriginalFrame(); //æ’­æ”¾å®ŒæˆåŽæ˜¯å¦æ¢å¤ç¬¬ä¸€å¸§  
 	if (bRestore)  
 	{  
-		_target->setSpriteFrame(_origFrame); //»Ö¸´µÚÒ»Ö¡  
+		_target->setSpriteFrame(_origFrame); //æ¢å¤ç¬¬ä¸€å¸§  
 	}  
 }  
 
@@ -69,7 +69,7 @@ void AnimationMember::setFrame(int frameIndex)
 		CCLog("AnimationMember setFrame frameindex is greater than framecount, %d, %d", frameIndex, nCount);  
 		return;  
 	}  
-	//´Ó¶¯»­ÀïÈ¡µÃindexÖ¡  
+	//ä»ŽåŠ¨ç”»é‡Œå–å¾—indexå¸§  
 	CCAnimationFrame *frame = (CCAnimationFrame *)(frames.at(frameIndex));  
 	CCSpriteFrame *spriteFrame = frame->getSpriteFrame();  
 

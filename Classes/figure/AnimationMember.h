@@ -1,4 +1,4 @@
-#ifndef _AnimationMember_  
+ï»¿#ifndef _AnimationMember_  
 #define _AnimationMember_  
 
 #include "cocos2d.h" 
@@ -12,15 +12,15 @@ public:
 	~AnimationMember();  
 
 	static AnimationMember* memberWithAnimation(cocos2d::CCAnimation *animation, cocos2d::CCSprite *target);  
-	bool initWithAnimation(cocos2d::CCAnimation *animation, cocos2d::CCSprite *target); //ÓÃ¶¯»­ºÍ²¥·Å¶ÔÏóÀ´³õÊ¼»¯  
+	bool initWithAnimation(cocos2d::CCAnimation *animation, cocos2d::CCSprite *target); //ç”¨åŠ¨ç”»å’Œæ’­æ”¾å¯¹è±¡æ¥åˆå§‹åŒ–  
 
-	void start();   //¿ªÊ¼²¥·Å¶¯»­  
-	void stop();    //Í£Ö¹²¥·Å¶¯»­  
-	void setFrame(int frameIndex); //ÉèÖÃ²¥·Å¶¯»­µÄ¶ÔÏó(_target)Í¼Æ¬Îª¶¯»­ÖĞµÄÄ³Ò»Ö¡  
+	void start();   //å¼€å§‹æ’­æ”¾åŠ¨ç”»  
+	void stop();    //åœæ­¢æ’­æ”¾åŠ¨ç”»  
+	void setFrame(int frameIndex); //è®¾ç½®æ’­æ”¾åŠ¨ç”»çš„å¯¹è±¡(_target)å›¾ç‰‡ä¸ºåŠ¨ç”»ä¸­çš„æŸä¸€å¸§  
 protected:  
-	cocos2d::CCSpriteFrame* _origFrame;  //³õÊ¼Ö¡  
-	cocos2d::CCAnimation* _animation;    //¶¯»­  
-	cocos2d::CCSprite *_target;          //Ë­ÔÚ²¥·Å¶¯»­  
+	cocos2d::CCSpriteFrame* _origFrame;  //åˆå§‹å¸§  
+	cocos2d::CCAnimation* _animation;    //åŠ¨ç”»  
+	cocos2d::CCSprite *_target;          //è°åœ¨æ’­æ”¾åŠ¨ç”»  
 private:  
 };  
 #endif  
